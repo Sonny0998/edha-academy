@@ -129,30 +129,31 @@ export default function HomeClient({ featuredCourses, categories, stats }: Props
   return (
     <>
       {/* ══════════════════════════════════════════════
-          HERO — two real columns, no CSS mask tricks
+          HERO — image ALWAYS beside text on ALL screens
       ══════════════════════════════════════════════ */}
       <section
         className="bg-white overflow-hidden"
         style={{ paddingTop: '64px' }}
       >
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[calc(100vh-64px)]">
+          {/* grid-cols-2 always — no responsive switching */}
+          <div className="grid grid-cols-2" style={{ minHeight: 'calc(100vh - 64px)' }}>
 
             {/* ── Left: text ── */}
-            <div className="flex items-center px-6 sm:px-10 lg:px-16 py-16 lg:py-20">
-              <div className="w-full max-w-xl">
+            <div className="flex items-center px-4 sm:px-10 lg:px-16 py-8 lg:py-20">
+              <div className="w-full">
 
-                <div className="inline-flex items-center gap-2 bg-blue/10 border border-blue/20 rounded-full px-4 py-1.5 text-sm text-blue font-medium mb-6">
-                  <Star size={12} className="fill-blue" />
+                <div className="inline-flex items-center gap-1.5 bg-blue/10 border border-blue/20 rounded-full px-3 py-1 text-xs sm:text-sm text-blue font-medium mb-4 sm:mb-6">
+                  <Star size={11} className="fill-blue" />
                   {t('landing.badge')}
                 </div>
 
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text mb-5 leading-[1.1] tracking-tight">
+                <h1 className="text-xl sm:text-4xl lg:text-6xl font-extrabold text-text mb-3 sm:mb-5 leading-[1.1] tracking-tight">
                   {t('landing.hero1')}<br />
                   <span className="text-cyan">{t('landing.hero2')}</span>
                 </h1>
 
-                <div className="text-base text-text2 mb-8 space-y-1.5 leading-relaxed">
+                <div className="hidden sm:block text-base text-text2 mb-8 space-y-1.5 leading-relaxed">
                   <p>{t('landing.sub1')}</p>
                   <p>{t('landing.sub2')}</p>
                   <p className="text-text3">
@@ -160,51 +161,42 @@ export default function HomeClient({ featuredCourses, categories, stats }: Props
                   </p>
                 </div>
 
-                <div className="flex flex-wrap gap-3 mb-5">
+                <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-3 mb-3 sm:mb-5">
                   <Link href="/cursos"
-                    className="inline-flex items-center gap-2 text-white font-semibold px-6 py-3 rounded-xl text-sm edha-gradient hover:opacity-90 transition-opacity shadow-md shadow-blue/20">
-                    <BookOpen size={15} /> {t('landing.explore')} →
+                    className="inline-flex items-center justify-center gap-1.5 text-white font-semibold px-3 sm:px-6 py-2 sm:py-3 rounded-xl text-xs sm:text-sm edha-gradient hover:opacity-90 transition-opacity shadow-md shadow-blue/20">
+                    <BookOpen size={13} /> {t('landing.explore')} →
                   </Link>
                   <Link href="/auth/inscription"
-                    className="inline-flex items-center gap-2 bg-white border border-border text-text font-semibold px-6 py-3 rounded-xl text-sm hover:bg-bg2 transition-colors shadow-sm">
-                    <Play size={13} className="fill-blue text-blue" /> {t('landing.start')}
+                    className="inline-flex items-center justify-center gap-1.5 bg-white border border-border text-text font-semibold px-3 sm:px-6 py-2 sm:py-3 rounded-xl text-xs sm:text-sm hover:bg-bg2 transition-colors shadow-sm">
+                    <Play size={11} className="fill-blue text-blue" /> {t('landing.start')}
                   </Link>
                 </div>
 
                 <Link href="/auth/devenir-instructeur"
-                  className="inline-flex items-center gap-2 bg-white border border-border text-text2 hover:text-blue text-sm px-5 py-2.5 rounded-xl transition-colors hover:border-blue/30 shadow-sm">
+                  className="hidden sm:inline-flex items-center gap-2 bg-white border border-border text-text2 hover:text-blue text-sm px-5 py-2.5 rounded-xl transition-colors hover:border-blue/30 shadow-sm">
                   <School size={15} className="text-blue" />
                   {t('landing.school')} <strong className="text-blue">SYGECO</strong>
                 </Link>
               </div>
             </div>
 
-            {/* ── Right: image — overflows slightly into text area ── */}
-            <div className="relative hidden lg:block" style={{ marginLeft: '-80px' }}>
+            {/* ── Right: image — always visible, no hidden class ── */}
+            <div className="relative" style={{ marginLeft: '-40px' }}>
               <img
                 src="/hero-students.jpg"
                 alt="Étudiants EDHA Academy Haïti"
                 className="absolute inset-0 w-full h-full object-cover object-center"
               />
-              {/* Left fade: image becomes pale/transparent toward text */}
+              {/* Smooth fade from white into image */}
               <div
                 className="absolute inset-0"
                 style={{
-                  background: 'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.7) 15%, rgba(255,255,255,0.15) 35%, transparent 55%)'
+                  background: 'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.6) 20%, rgba(255,255,255,0.1) 45%, transparent 65%)'
                 }}
               />
             </div>
 
           </div>
-        </div>
-
-        {/* Mobile: image banner below text */}
-        <div className="lg:hidden w-full h-56 sm:h-72 overflow-hidden">
-          <img
-            src="/hero-students.jpg"
-            alt="Étudiants EDHA Academy Haïti"
-            className="w-full h-full object-cover object-top"
-          />
         </div>
       </section>
 
